@@ -1,0 +1,86 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+    <div class="col-8 offset-2">
+        <body>
+            <br><br>
+    <h3>Create a New Travel Listing</h3>
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data"> 
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" name="listing[title]" placeholder="Title" class="form-control" required >
+                <div class="invalid-feedback">
+                    Please provide a title for your listing.
+                </div>
+
+            </div>
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea name="listing[description]" placeholder="Description" class="form-control" required></textarea>
+                <div class="invalid-feedback">
+                    Please provide a description for your listing.
+                </div>
+             </div>
+            
+            
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" name="listing[image]" class="form-control">
+
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price per night</label>
+                <input type="number" name="listing[price]" placeholder="Price per night" class="form-control" required>
+                <div class="invalid-feedback">
+                    Please provide a price for your listing.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" name="listing[country]" placeholder="Country" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Country name should be valid.
+                    </div>
+            </div>
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" name="listing[location]" placeholder="Location" class="form-control" required>
+                    <div class="invalid-feedback">
+                        valid location is necessary.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category</label>
+                    <select name="listing[category]" class="form-select" required>
+                        <option value="trending">Trending</option>
+                        <option value="rooms">Rooms</option>
+                        <option value="iconic-cities">Iconic Cities</option>
+                        <option value="mountains">Mountains</option>
+                        <option value="castles">Castles</option>
+                        <option value="pool">Pool</option>
+                        <option value="camping">Camping</option>
+                        <option value="farms">Farms</option>
+                        <option value="arctic">Arctic</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="latitude" class="form-label">Latitude (optional)</label>
+                    <input type="number" step="any" name="listing[latitude]" placeholder="e.g. 22.497" class="form-control">
+                    <div class="form-text">Add latitude and longitude for stricter map placement.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="longitude" class="form-label">Longitude (optional)</label>
+                    <input type="number" step="any" name="listing[longitude]" placeholder="e.g. 88.155" class="form-control">
+                    <div class="form-text">Leave empty if you prefer free geocoding instead.</div>
+                </div>
+             <button type="submit" class="btn btn-dark add-btn">Add</button>  
+             <br><br>
+        </form> 
+
+    </body>
+
+    </div>
+    
+        
+
+</div>

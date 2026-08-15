@@ -1,0 +1,139 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+   <style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .filter-link{
+        text-decoration: none;
+        color: inherit;
+    }
+    .filter{
+        margin-right: 2rem;
+        text-align: center;
+        margin-top: 1rem;
+        opacity: 0.7;
+        transition: all 0.2s ease;
+    }
+    .filter-link:hover .filter,
+    .filter-link.active .filter{
+        opacity: 1;
+        transform: translateY(-2px);
+        cursor: pointer;
+    }
+    .filter-link.active .filter {
+        color: #0d6efd;
+    }
+    .filter p{
+        font-size: 0.8rem;
+        margin: 0.3rem 0 0;
+    }
+    .filter-toggle-wrap {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        margin-right: 0.5rem;
+        border: #000 1px solid;
+        border-radius: 1rem;
+    }
+    .tax-toggle-text {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #222;
+        white-space: nowrap;
+        padding: 0.5rem 0.75rem;
+    }
+    .tax-switch {
+        display: flex;
+        align-items: center;
+        margin-right: 1.5rem;
+        border: none;
+        margin-bottom: 0.5rem;
+        margin-top: 0.5rem;
+    }
+    .tax-switch .form-check-input {
+        width: 3rem;
+        height: 1.75rem;
+        cursor: pointer;
+        background-color: #e7e7e7;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: none;
+    }
+    .tax-switch .form-check-input:checked {
+        background-color: #3b38ff;
+        border-color: #3b38ff;
+    }
+    .tax-switch .form-check-input:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 56, 92, 0.2);
+    }
+    .listing-price-wrap {
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+    }
+    .gst-tag {
+        display: none;
+        color: #000;
+        font-weight: 700;
+        font-size: 0.9rem;
+    }
+    .listing-price-wrap.tax-enabled .gst-tag {
+        display: inline;
+    }
+   </style> 
+    <div id="filters">
+        <% for(let filter of filters){ %>
+            <a href="/listings<%= filter.value === 'all' ? '' : '?category=' + filter.value %>" class="filter-link <%= activeCategory === filter.value ? 'active' : '' %>">
+                <div class="filter">
+                    <div><i class="<%= filter.icon %>"></i></div>
+                    <p><%= filter.label %></p>
+                </div>
+            </a>
+        <% } %>
+
+        <div class="filter-toggle-wrap">
+            <span class="tax-toggle-text">Display total after taxes</span>
+            <div class="form-check form-switch tax-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="gstToggle" aria-label="Toggle GST">
+            </div>
+        </div>
+    </div>
+    <div class="row row-cols-lg-3  row-cols-md-2 row-cols-sm-1 " >
+         <% for(let listing of allListings){ %>
+            <a href="/listings/<%=listing._id%>" style="text-decoration: none; " class="listing-link">
+                <div class="card col listing-card" >
+                    <img src="<%=listing.image.url%>" class="card-img-top" alt="listing_image" style="height: 20rem;">
+                    <div class="card-img-overlay">
+                    </div>
+                        <div class="card-body">
+                            <p class="card-text" >
+                            <b><%=listing.title%>  <br></b> 
+                            <span class="listing-price-wrap">
+                                &#8377; <span class="listing-price"><%=listing.price.toLocaleString("en-IN")%></span> per night
+                                <span class="gst-tag"> +18% GST</span>
+                            </span>
+                            </p>
+                        </div>
+                </div>
+
+            </a>
+    
+    <%}%>
+
+    </div>
+   
+    
+
+
+    
+    
+</body>
+
