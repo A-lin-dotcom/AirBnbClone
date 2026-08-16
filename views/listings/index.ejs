@@ -8,17 +8,24 @@
         align-items: center;
         gap: 1rem;
         margin-bottom: 1.5rem;
+        padding: 0;
     }
     .filter-link{
         text-decoration: none;
         color: inherit;
+        min-width: 60px;
     }
     .filter{
-        margin-right: 2rem;
+        margin-right: 1rem;
         text-align: center;
-        margin-top: 1rem;
+        margin-top: 0.5rem;
         opacity: 0.7;
         transition: all 0.2s ease;
+        min-height: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     .filter-link:hover .filter,
     .filter-link.active .filter{
@@ -29,8 +36,11 @@
     .filter-link.active .filter {
         color: #0d6efd;
     }
+    .filter i {
+        font-size: 1.5rem;
+    }
     .filter p{
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         margin: 0.3rem 0 0;
     }
     .filter-toggle-wrap {
@@ -38,13 +48,13 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
-        margin-top: 1rem;
-        margin-right: 0.5rem;
+        margin-top: 0.5rem;
         border: #000 1px solid;
         border-radius: 1rem;
+        padding: 0.25rem 0.5rem;
     }
     .tax-toggle-text {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 600;
         color: #222;
         white-space: nowrap;
@@ -53,14 +63,14 @@
     .tax-switch {
         display: flex;
         align-items: center;
-        margin-right: 1.5rem;
+        margin-right: 1rem;
         border: none;
-        margin-bottom: 0.5rem;
-        margin-top: 0.5rem;
+        margin-bottom: 0;
+        margin-top: 0;
     }
     .tax-switch .form-check-input {
-        width: 3rem;
-        height: 1.75rem;
+        width: 2.75rem;
+        height: 1.65rem;
         cursor: pointer;
         background-color: #e7e7e7;
         border: 1px solid rgba(0, 0, 0, 0.12);
@@ -88,10 +98,51 @@
     .listing-price-wrap.tax-enabled .gst-tag {
         display: inline;
     }
+    
+    /* Responsive Filters */
+    @media (max-width: 767px) {
+        #filters {
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding: 0 -0.5rem;
+        }
+        
+        .filter {
+            margin-right: 0.5rem;
+            min-width: 55px;
+            min-height: 45px;
+        }
+        
+        .filter i {
+            font-size: 1.25rem;
+        }
+        
+        .filter p {
+            font-size: 0.65rem;
+        }
+        
+        .filter-toggle-wrap {
+            flex-basis: 100%;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100%;
+            justify-content: space-between;
+        }
+        
+        .tax-toggle-text {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .tax-switch .form-check-input {
+            width: 2.5rem;
+            height: 1.5rem;
+        }
+    }
    </style> 
     <div id="filters">
         <% for(let filter of filters){ %>
-            <a href="/listings<%= filter.value === 'all' ? '' : '?category=' + filter.value %>" class="filter-link <%= activeCategory === filter.value ? 'active' : '' %>">
+            <a href="/listings<%= filter.value === 'all' ? '' : '?category=' + filter.value %>" class="filter-link <%= activeCategory === filter.value ? 'active' : '' %>" title="<%= filter.label %>">
                 <div class="filter">
                     <div><i class="<%= filter.icon %>"></i></div>
                     <p><%= filter.label %></p>
